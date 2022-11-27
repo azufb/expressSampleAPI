@@ -45,7 +45,7 @@ app.post('/addTask', (req, res) => {
 app.get('/getTasks', (req, res) => {
     const sql = 'SELECT * FROM tasks';
 
-    db.one(sql)
+    db.manyOrNone(sql)
     .then((data) => {
         res.send(data);
     });
