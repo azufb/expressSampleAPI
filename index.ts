@@ -34,7 +34,7 @@ app.get('/api', (req, res) => {
 app.post('/addTask', (req, res) => {
     console.log(req.body);
     const title = req.body.title;
-    const sql = 'INSERT INTO tasks VALUES($1)';
+    const sql = 'INSERT INTO tasks(title) VALUES($1)';
 
     db.one(sql, [title])
     .then((data) => {
