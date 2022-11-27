@@ -6,6 +6,9 @@ const port = 3000;
 
 app.use(cors());
 
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }));
+
 const connectionConfig = {
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
