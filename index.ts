@@ -12,7 +12,7 @@ app.get('/', (req, res) => {
         user: 'root',
         password: 'root',
         database: 'MYSQLDB_DATABASE',
-        port: 3000
+        port: 3001
     });
     
     config.connect(function(err) {
