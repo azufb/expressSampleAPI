@@ -7,11 +7,11 @@ const port = 3000;
 app.use(cors());
 
 const connectionConfig = {
-    host: 'dpg-ce1mpa1a6gdsa63ihhq0-a',
-    port: 5432,
-    database: 'sample_db_zxg9',
-    user: 'root',
-    password: 'Y8FXbb14zGdDJZBN2tESxtOFCY7gfQIg',
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
+    database: process.env.DB_DATABASE,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
 };
 
 const db = pgp(connectionConfig);
