@@ -16,7 +16,7 @@ const connectionConfig = {
 
 const db = pgp(connectionConfig);
 
-const createTasksTable = 'CREATE TABLE IF NOT EXISTS tasks (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, title VARCHAR(100) NOT NULL)';
+const createTasksTable = 'CREATE TABLE IF NOT EXISTS tasks (id serial PRIMARY KEY, title VARCHAR(100) NOT NULL)';
 
 db.one(createTasksTable);
 
