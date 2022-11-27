@@ -34,6 +34,7 @@ app.post('/addTask', (req, res) => {
 
     db.one(sql, [title])
     .then((data) => {
+        console.log(data);
         res.send(data);
     });
 });
