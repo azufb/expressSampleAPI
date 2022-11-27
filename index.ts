@@ -16,12 +16,35 @@ const connectionConfig = {
 
 const db = pgp(connectionConfig);
 
+const createTasksTable = 'CREATE TABLE IF NOT EXISTS tasks (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT, title VARCHAR(100) NOT NULL)';
+
+db.one(createTasksTable);
+
 app.get('/', (req, res) => {
     res.send('Hello World!');
 });
 
 app.get('/api', (req, res) => {
     res.send({message: 'Hello!!'});
+});
+
+app.post('/addTask', (req, res) => {
+    const title = req.body.title;
+    const sql = 'INSERT INTO tasks VALUES($1)';
+
+    db.one(sql, [title])
+    .then((data) => {
+        res.send(data);
+    });
+});
+
+app.get('/getTasks', (req, res) => {
+    const sql = 'SELECT * FROM tasks';
+
+    db.one(sql)
+    .then((data) => {
+        res.send(data);
+    });
 });
 
 app.listen(port, () => {
