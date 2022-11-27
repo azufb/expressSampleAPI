@@ -8,7 +8,7 @@ app.use(cors());
 
 app.get('/', (req, res) => {
     const config = mysql2.createConnection({
-        host: 'https://expresssampleapi.onrender.com',
+        host: '127.0.0.1',
         user: 'root',
         password: 'root',
         database: 'MYSQLDB_DATABASE',
@@ -19,7 +19,7 @@ app.get('/', (req, res) => {
         if (err) throw err;
         console.log('Connected');
     });
-    
+
     res.send('Hello World!');
 });
 
