@@ -6,7 +6,7 @@ const port = 3000;
 
 app.use(cors());
 
-const db = pgp('postgres://root:Y8FXbb14zGdDJZBN2tESxtOFCY7gfQIg@dpg-ce1mpa1a6gdsa63ihhq0-a/sample_db_zxg9');
+const db = pgp('postgres://root:Y8FXbb14zGdDJZBN2tESxtOFCY7gfQIg@dpg-ce1mpa1a6gdsa63ihhq0-a:5432/sample_db_zxg9');
 
 app.get('/', (req, res) => {
     res.send('Hello World!');
