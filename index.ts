@@ -29,6 +29,7 @@ app.get('/api', (req, res) => {
 });
 
 app.post('/addTask', (req, res) => {
+    console.log(req.body);
     const title = req.body.title;
     const sql = 'INSERT INTO tasks VALUES($1)';
 
