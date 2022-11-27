@@ -1,12 +1,20 @@
 const express = require('express');
 const cors = require('cors');
-const pgp = require('pg-promise');
+const pgp = require('pg-promise')();
 const app = express();
 const port = 3000;
 
 app.use(cors());
 
-const db = pgp('postgres://root:Y8FXbb14zGdDJZBN2tESxtOFCY7gfQIg@dpg-ce1mpa1a6gdsa63ihhq0-a:5432/sample_db_zxg9');
+const connectionConfig = {
+    host: 'dpg-ce1mpa1a6gdsa63ihhq0-a',
+    port: 5432,
+    database: 'sample_db_zxg9',
+    user: 'root',
+    password: 'Y8FXbb14zGdDJZBN2tESxtOFCY7gfQIg',
+};
+
+const db = pgp(connectionConfig);
 
 app.get('/', (req, res) => {
     res.send('Hello World!');
