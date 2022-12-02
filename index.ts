@@ -42,6 +42,10 @@ app.post('/addTask', (req, res) => {
     });
 });
 
+app.post('/addTasks', (req, res) => {
+    res.send(req.body);
+});
+
 app.get('/getTasks', (req, res) => {
     const sql = 'SELECT * FROM tasks';
 
