@@ -45,6 +45,8 @@ app.post('/addTask', (req, res) => {
 app.post('/addTasks', (req, res) => {
     const columnSet = new pgp.helpers.ColumnSet(['title'], {table: 'tasks'});
     const response = pgp.helpers.insert(req.body.sample, columnSet);
+    console.log(req.body.sample);
+    console.log(response);
     
     res.send(response);
 });
