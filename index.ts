@@ -20,8 +20,9 @@ const connectionConfig = {
 const db = pgp(connectionConfig);
 
 const createTasksTable = 'CREATE TABLE IF NOT EXISTS tasks (title VARCHAR(100) NOT NULL)';
+const createTasksTable2 = 'CREATE TABLE IF NOT EXISTS allTasks (title VARCHAR(100) NOT NULL)';
 
-db.one(createTasksTable);
+db.one(createTasksTable2);
 
 app.get('/', (req, res) => {
     res.send('Hello World!');
@@ -33,7 +34,7 @@ app.get('/api', (req, res) => {
 
 app.post('/addTask', (req, res) => {
     const title = req.body.title;
-    const sql = 'INSERT INTO tasks(title) VALUES($1)';
+    const sql = 'INSERT INTO allTasks(title) VALUES($1)';
 
     db.manyOrNone(sql, [title])
     .then(data => {
@@ -43,7 +44,7 @@ app.post('/addTask', (req, res) => {
 });
 
 app.post('/addTasks', (req, res) => {
-    const columnSet = new pgp.helpers.ColumnSet(['title'], {table: 'tasks'});
+    const columnSet = new pgp.helpers.ColumnSet(['title'], {table: 'allTasks'});
     const response = pgp.helpers.insert(req.body.sample, columnSet);
     console.log(req.body.sample);
     console.log(response);
@@ -52,7 +53,7 @@ app.post('/addTasks', (req, res) => {
 });
 
 app.get('/getTasks', (req, res) => {
-    const sql = 'SELECT * FROM tasks';
+    const sql = 'SELECT * FROM allTasks';
 
     db.manyOrNone(sql)
     .then((data) => {
@@ -62,7 +63,7 @@ app.get('/getTasks', (req, res) => {
 
 app.post('/deleteTask', (req, res) => {
     const targetId = req.body.id;
-    const sql = 'DELETE FROM tasks';
+    const sql = 'DELETE FROM allTasks';
 
     db.manyOrNone(sql)
     .then(data => {
