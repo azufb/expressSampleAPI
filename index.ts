@@ -58,6 +58,16 @@ app.get('/getTasks', (req, res) => {
     });
 });
 
+app.post('/deleteTask', (req, res) => {
+    const targetId = req.body.id;
+    const sql = 'DELETE FROM tasks WHERE id = ($1)';
+
+    db.manyOrNone(sql, [targetId])
+    .then(data => {
+        res.send(data);
+    });
+});
+
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
 });
