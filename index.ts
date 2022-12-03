@@ -20,7 +20,6 @@ const connectionConfig = {
 const db = pgp(connectionConfig);
 
 const createTasksTable = 'CREATE TABLE IF NOT EXISTS tasks (id serial PRIMARY KEY, title VARCHAR(100) NOT NULL)';
-const createTasksTable2 = 'CREATE TABLE IF NOT EXISTS allTasks (title VARCHAR(100) NOT NULL)';
 
 db.one(createTasksTable);
 
@@ -65,9 +64,9 @@ app.get('/getTasks', (req, res) => {
 
 app.post('/deleteTask', (req, res) => {
     const targetId = req.body.id;
-    const sql = 'DELETE FROM tasks';
+    const sql = 'DELETE FROM tasks WHERE id = $1';
 
-    db.manyOrNone(sql)
+    db.manyOrNone(sql, [targetId])
     .then(data => {
         res.send(data);
     });
