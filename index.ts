@@ -1,7 +1,7 @@
-const express: any = require('express');
-const cors: any = require('cors');
-const pgp: any = require('pg-promise')();
-const app: any = express();
+const express = require('express');
+const cors = require('cors');
+const pgp = require('pg-promise')();
+const app = express();
 const port: number = 3000;
 
 type ConnectionConfigType = {
