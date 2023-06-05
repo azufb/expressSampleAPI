@@ -2,22 +2,14 @@ const express = require('express');
 const cors = require('cors');
 const pgp = require('pg-promise')();
 const app = express();
-const port: number = 3000;
-
-type ConnectionConfigType = {
-  host: string | undefined;
-  port: string | undefined;
-  database: string | undefined;
-  user: string | undefined;
-  password: string | undefined;
-};
+const port = 3000;
 
 app.use(cors());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const connectionConfig: ConnectionConfigType = {
+const connectionConfig = {
   host: process.env.DB_HOST,
   port: process.env.DB_PORT,
   database: process.env.DB_DATABASE,
@@ -25,48 +17,48 @@ const connectionConfig: ConnectionConfigType = {
   password: process.env.DB_PASSWORD,
 };
 
-const db: any = pgp(connectionConfig);
+const db = pgp(connectionConfig);
 
-const createTasksTable: string =
+const createTasksTable =
   'CREATE TABLE IF NOT EXISTS tasks (id serial PRIMARY KEY, title VARCHAR(100) NOT NULL)';
 
 db.one(createTasksTable);
 
-app.post('/addTask', (req: any, res: any) => {
-  const title: any = req.body.title;
-  const sql: string = 'INSERT INTO tasks(title) VALUES($1)';
+app.post('/addTask', (req, res) => {
+  const title = req.body.title;
+  const sql = 'INSERT INTO tasks(title) VALUES($1)';
 
-  db.manyOrNone(sql, [title]).then((data: any) => {
+  db.manyOrNone(sql, [title]).then((data) => {
     console.log(data);
     res.send(data);
   });
 });
 
-app.post('/addTasks', (req: any, res: any) => {
-  const columnSet: any = new pgp.helpers.ColumnSet(['title'], {
+app.post('/addTasks', (req, res) => {
+  const columnSet = new pgp.helpers.ColumnSet(['title'], {
     table: 'tasks',
   });
-  const query: any = pgp.helpers.insert(req.body.sample, columnSet);
+  const query = pgp.helpers.insert(req.body.sample, columnSet);
 
-  db.manyOrNone(query).then((data: any) => {
+  db.manyOrNone(query).then((data) => {
     console.log(data);
     res.send(data);
   });
 });
 
-app.get('/getTasks', (req: any, res: any) => {
-  const sql: string = 'SELECT * FROM tasks';
+app.get('/getTasks', (req, res) => {
+  const sql = 'SELECT * FROM tasks';
 
-  db.manyOrNone(sql).then((data: any) => {
+  db.manyOrNone(sql).then((data) => {
     res.send(data);
   });
 });
 
-app.post('/deleteTask', (req: any, res: any) => {
-  const targetId: any = req.body.id;
-  const sql: string = 'DELETE FROM tasks WHERE id = $1';
+app.post('/deleteTask', (req, res) => {
+  const targetId = req.body.id;
+  const sql = 'DELETE FROM tasks WHERE id = $1';
 
-  db.manyOrNone(sql, [targetId]).then((data: any) => {
+  db.manyOrNone(sql, [targetId]).then((data) => {
     res.send(data);
   });
 });
