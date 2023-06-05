@@ -24,14 +24,6 @@ const createTasksTable =
 
 db.one(createTasksTable);
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
-
-app.get('/api', (req, res) => {
-  res.send({ message: 'Hello!!' });
-});
-
 app.post('/addTask', (req, res) => {
   const title = req.body.title;
   const sql = 'INSERT INTO tasks(title) VALUES($1)';
