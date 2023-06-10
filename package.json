@@ -2,9 +2,9 @@
   "name": "express_sampleapi",
   "version": "1.0.0",
   "description": "",
-  "main": "index.ts",
+  "main": "/api/index.ts",
   "scripts": {
-    "start": "ts-node index.ts",
+    "start": "ts-node api/index.ts",
     "build": "rimraf dist && tsc"
   },
   "author": "",
