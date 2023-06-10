@@ -2,10 +2,9 @@
   "name": "express_sampleapi",
   "version": "1.0.0",
   "description": "",
-  "main": "/api/index.ts",
+  "main": "index.ts",
   "scripts": {
-    "start": "ts-node api/index.ts",
-    "build": "rimraf dist && tsc"
+    "start": "ts-node index.ts"
   },
   "author": "",
   "license": "ISC",
@@ -17,7 +16,6 @@
   },
   "devDependencies": {
     "@types/node": "^20.2.5",
-    "rimraf": "^5.0.1",
     "ts-node": "^10.9.1"
   }
 }
