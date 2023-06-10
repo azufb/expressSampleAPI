@@ -24,45 +24,45 @@ const createTasksTable =
 
 db.one(createTasksTable);
 
-app.get('/', (req, res) => {
+app.get('/', (req: any, res: any) => {
   res.send('Hello World!');
 });
 
-app.post('/addTask', (req, res) => {
+app.post('/addTask', (req: any, res: any) => {
   const title = req.body.title;
   const sql = 'INSERT INTO tasks(title) VALUES($1)';
 
-  db.manyOrNone(sql, [title]).then((data) => {
+  db.manyOrNone(sql, [title]).then((data: any) => {
     console.log(data);
     res.send(data);
   });
 });
 
-app.post('/addTasks', (req, res) => {
+app.post('/addTasks', (req: any, res: any) => {
   const columnSet = new pgp.helpers.ColumnSet(['title'], {
     table: 'tasks',
   });
   const query = pgp.helpers.insert(req.body.sample, columnSet);
 
-  db.manyOrNone(query).then((data) => {
+  db.manyOrNone(query).then((data: any) => {
     console.log(data);
     res.send(data);
   });
 });
 
-app.get('/getTasks', (req, res) => {
+app.get('/getTasks', (req: any, res: any) => {
   const sql = 'SELECT * FROM tasks';
 
-  db.manyOrNone(sql).then((data) => {
+  db.manyOrNone(sql).then((data: any) => {
     res.send(data);
   });
 });
 
-app.post('/deleteTask', (req, res) => {
+app.post('/deleteTask', (req: any, res: any) => {
   const targetId = req.body.id;
   const sql = 'DELETE FROM tasks WHERE id = $1';
 
-  db.manyOrNone(sql, [targetId]).then((data) => {
+  db.manyOrNone(sql, [targetId]).then((data: any) => {
     res.send(data);
   });
 });
